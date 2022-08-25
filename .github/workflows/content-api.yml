@@ -32,6 +32,7 @@ jobs:
     steps:
     # Checkout the repo
     - uses: actions/checkout@master
+
     - name: Build and push an image to container registry
       uses: docker/build-push-action@v1
       with:
