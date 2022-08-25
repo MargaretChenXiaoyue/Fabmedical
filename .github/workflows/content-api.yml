@@ -60,20 +60,20 @@ jobs:
     #       ${{ env.containerRegistry }}.azurecr.io/${{ env.imageRepository }}:${{ env.tag }}
     #     imagepullsecrets: |
     #       ingress-demo-secret
-    - uses: Azure/aks-set-context@v1
-      with:
-        creds: '${{ secrets.AZURE_CREDENTIALS }}'
-        cluster-name: '${{ env.clusterName }}'
-        resource-group: '${{ env.resourceGroupName }}'
+      - uses: Azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: '${{ env.clusterName }}'
+          resource-group: '${{ env.resourceGroupName }}'
           
-    - name: Deploy to AKS
-      uses: azure/k8s-deploy@v1
-      with:
-        manifests: |
-          api.deployment.yml
-          api.service.yml
-        images: |   
-          ${{ env.containerRegistry }}/${{ env.imageRepository }}:${{ env.tag }}
-        imagepullsecrets: |
-          ingress-demo-secret
-        namespace: ingress-dem
+      - name: Deploy to AKS
+        uses: azure/k8s-deploy@v1
+        with:
+          manifests: |
+            api.deployment.yml
+            api.service.yml
+          images: |
+            ${{ env.containerRegistry }}/${{ env.imageRepository }}:${{ env.tag }}
+          imagepullsecrets: |
+            ingress-demo-secret
+          namespace: ingress-demo
